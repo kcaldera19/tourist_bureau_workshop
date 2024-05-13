@@ -105,25 +105,44 @@ window.onload = function(){
    
     initDropdownForCategories();
     initDropdownForActivities();
-
-}
-function displayCategories(event){
-
-    event.preventDefault();
-
-    let theDropdown = document.querySelector("#categoriesSelect");
-
-    let theActivityDropdown = document.querySelector("#activitiesSelect");
-
+    let dropdownCategories= document.querySelector("#categoriesSelect");
+    dropdownCategories.addEventListener("change",getActivitiesInCategory);
 
 }
 
+//This function will return a a list of the matching activities for a given category
+//Just pass it the array of activities and the category you are looking for
+function getActivitiesInCategory(activities, category) {
 
+    //start by creating an empty list to hold our matches
+    let matching = [];
+    //number of items on the menu
+    let numItems = activities.length;
+
+    //loop over the activities to find matches
+    for (let i = 0; i < numItems; i++) {
+        if (activities[i].category === category) {
+            //add that activity to our matches array
+            matching.push(activities[i]);
+        }
+    }
+    
+    //return all the matching menu items
+    return matching;
+}
+
+
+//Example usage
+let matches = getActivitiesInCategory(activities, "Adventures"); 
+
+// the dropdown for the categories
 function initDropdownForCategories(){
 
     
+    
+    
 
-    let theDropdown= document.querySelector("#categoriesSelect");
+    let theDropdownforCategories= document.querySelector("#categoriesSelect");
 
 
     let numberOfCategories= categories.length
@@ -135,7 +154,7 @@ function initDropdownForCategories(){
         newOptions.textContent = categories[i];
         newOptions.value = categories[i];
 
-        theDropdown.appendChild(newOptions);
+        theDropdownforCategories.appendChild(newOptions);
     }
 }
 
