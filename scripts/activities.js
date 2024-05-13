@@ -102,5 +102,63 @@ let activities = [
 ];
 
 window.onload = function(){
+   
+    initDropdownForCategories();
+    initDropdownForActivities();
 
+}
+function displayCategories(event){
+
+    event.preventDefault();
+
+    let theDropdown = document.querySelector("#categoriesSelect");
+
+    let theActivityDropdown = document.querySelector("#activitiesSelect");
+
+
+}
+
+
+function initDropdownForCategories(){
+
+    
+
+    let theDropdown= document.querySelector("#categoriesSelect");
+
+
+    let numberOfCategories= categories.length
+
+    for(let i = 0; i < numberOfCategories; i++){
+
+        let newOptions = document.createElement("option");
+
+        newOptions.textContent = categories[i];
+        newOptions.value = categories[i];
+
+        theDropdown.appendChild(newOptions);
+    }
+}
+
+function initDropdownForActivities (){
+
+    let theActivityDropdown= document.querySelector("#activitiesSelect");
+    // sets the default
+    let defaultOption = document.createElement("option");
+
+    defaultOption.textContent = "Select a Activity";
+    defaultOption.value = "";
+
+    // attaches the default
+    theActivityDropdown.appendChild(defaultOption);
+    let numberOfActivities= activities.length
+
+    for(let i = 0; i < numberOfActivities; i++){
+
+        let newOptions = document.createElement("option");
+
+        newOptions.textContent = activities[i].category;
+        newOptions.value = activities[i].category;
+
+        theActivityDropdown.appendChild(newOptions);
+    }
 }
