@@ -175,8 +175,8 @@ function initDropdownForActivities (){
 
         let newOptions = document.createElement("option");
 
-        newOptions.textContent = activities[i].category;
-        newOptions.value = activities[i].category;
+        newOptions.textContent = activities[i].name;
+        newOptions.value = activities[i].name;
 
         theActivityDropdown.appendChild(newOptions);
     }
