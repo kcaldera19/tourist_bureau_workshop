@@ -105,46 +105,35 @@ window.onload = function(){
    
     initDropdownForCategories();
     initDropdownForActivities();
+
+
+
+    let button = document.querySelector("#submitButton");
+    button.addEventListener("click",getdisplayActivities);
     let dropdownCategories= document.querySelector("#categoriesSelect");
-    dropdownCategories.addEventListener("change",getActivitiesInCategory);
-
-}
-
-//This function will return a a list of the matching activities for a given category
-//Just pass it the array of activities and the category you are looking for
-function getActivitiesInCategory(activities, category) {
-
-    //start by creating an empty list to hold our matches
-    let matching = [];
-    //number of items on the menu
-    let numItems = activities.length;
-
-    //loop over the activities to find matches
-    for (let i = 0; i < numItems; i++) {
-        if (activities[i].category === category) {
-            //add that activity to our matches array
-            matching.push(activities[i]);
-        }
-    }
+    dropdownCategories.addEventListener("change",initDropdownForCategories);
     
-    //return all the matching menu items
-    return matching;
+
 }
 
-
-//Example usage
-let matches = getActivitiesInCategory(activities, "Adventures"); 
+function getdisplayActivities(){
+    let selectedCategory = document.querySelector("#categoriesSelect");
+    let matchingActivites = getActivitiesInCategory(activities,categories);
+    getActivitiesInCategory(matchingActivites);
+}
 
 // the dropdown for the categories
 function initDropdownForCategories(){
 
     
-    
-    
-
     let theDropdownforCategories= document.querySelector("#categoriesSelect");
+    // sets the default
+    let defaultOption = document.createElement("option");
 
-
+    defaultOption.textContent = "Select a Categories";
+    defaultOption.value = "";
+    
+    theDropdownforCategories.appendChild(defaultOption);
     let numberOfCategories= categories.length
 
     for(let i = 0; i < numberOfCategories; i++){
@@ -158,9 +147,14 @@ function initDropdownForCategories(){
     }
 }
 
+
+
+
 function initDropdownForActivities (){
 
-    let theActivityDropdown= document.querySelector("#activitiesSelect");
+    
+
+    let theActivityDropdown = document.querySelector("#activitiesSelect");
     // sets the default
     let defaultOption = document.createElement("option");
 
@@ -181,3 +175,30 @@ function initDropdownForActivities (){
         theActivityDropdown.appendChild(newOptions);
     }
 }
+
+//This function will return a a list of the matching activities for a given category
+//Just pass it the array of activities and the category you are looking for
+
+function getActivitiesInCategory(activities, category) {
+
+    //start by creating an empty list to hold our matches
+    let matching = [];
+    //number of items on the menu
+    let numItems = activities.length;
+
+
+    //loop over the activities to find matches
+    for (let i = 0; i < numItems; i++) {
+        if (activities[i].category === category) {
+            //add that activity to our matches array
+            matching.push(activities[i]);
+        }
+    }
+    
+    //return all the matching menu items
+    return matching;
+    
+}
+//Example usage
+let matches = getActivitiesInCategory(activities, "Adventures"); 
+
