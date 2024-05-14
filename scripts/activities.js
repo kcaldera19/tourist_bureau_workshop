@@ -109,18 +109,15 @@ window.onload = function(){
 
 
     let button = document.querySelector("#submitButton");
-    button.addEventListener("click",getdisplayActivities);
+    button.addEventListener("click",displayActivities);
     let dropdownCategories= document.querySelector("#categoriesSelect");
     dropdownCategories.addEventListener("change",initDropdownForCategories);
-    
+    let activitiesDropdown = document.querySelector("#infoActivities");
+    activitiesDropdown.addEventListener("change",displayActivities);
 
 }
 
-function getdisplayActivities(){
-    let selectedCategory = document.querySelector("#categoriesSelect");
-    let matchingActivites = getActivitiesInCategory(activities,categories);
-    getActivitiesInCategory(matchingActivites);
-}
+
 
 // the dropdown for the categories
 function initDropdownForCategories(){
@@ -178,6 +175,29 @@ function initDropdownForActivities (){
 
 //This function will return a a list of the matching activities for a given category
 //Just pass it the array of activities and the category you are looking for
+function displayActivities(event) {
+
+    // prevents the form being submitted
+    event.preventDefault();
+
+    // gselects the dropdown element with the ID footballSelect and stores it in a variable
+    let theDropdown = document.querySelector("#activitiesSelect");
+
+    // gets the paragrah element where the results will be displayed
+    let resultsParagraph = document.querySelector("#theresults");
+
+    // get the index of the selected option in the dropdown
+    let selectedIndex = theDropdown.selectedIndex - 1;
+
+    if(theDropdown.value === ""){
+        resultsParagraph.innerHTML ="";
+    }else{
+        let selectedActivity = activities[selectedIndex];
+
+     // displaying the results
+        resultsParagraph.innerHTML = `you selected the ${selectedActivity.category} ID: ${selectedActivity.id} name: ${selectedActivity.name} description: ${selectedActivity.description} location: ${selectedActivity.location} price:$ ${selectedActivity.price}`
+    }
+}
 
 function getActivitiesInCategory(activities, category) {
 
